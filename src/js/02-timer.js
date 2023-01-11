@@ -25,7 +25,7 @@ const options = {
 const timer = {
   start() {
     setInterval(() => {
-      const timerData = options.chooseDate - Date.now();
+      const timerData = (options.chooseDate || 0) - Date.now();
 
       const { days, hours, minutes, seconds } = timer.convertMs(timerData);
 
