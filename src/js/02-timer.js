@@ -24,19 +24,23 @@ const options = {
 
 const timer = {
   start() {
-    setInterval(() => {
+    let intervalId = setInterval(() => {
       const timerData = (options.chooseDate || 0) - Date.now();
 
       const { days, hours, minutes, seconds } = timer.convertMs(timerData);
 
-      document.querySelector('[data-days]').textContent =
-        timer.addLeadingZero(days);
-      document.querySelector('[data-hours]').textContent =
-        timer.addLeadingZero(hours);
-      document.querySelector('[data-minutes]').textContent =
-        timer.addLeadingZero(minutes);
-      document.querySelector('[data-seconds]').textContent =
-        timer.addLeadingZero(seconds);
+      if (timerData >= 0) {
+        document.querySelector('[data-days]').textContent =
+          timer.addLeadingZero(days);
+        document.querySelector('[data-hours]').textContent =
+          timer.addLeadingZero(hours);
+        document.querySelector('[data-minutes]').textContent =
+          timer.addLeadingZero(minutes);
+        document.querySelector('[data-seconds]').textContent =
+          timer.addLeadingZero(seconds);
+      } else {
+        clearInterval(intervalId);
+      }
     }, 1000);
   },
 
